@@ -14,7 +14,6 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255), unique = True, index = True)
     pass_secure = db.Column(db.String(255))
-    comment = db.relationship('Comment', backref='main_user', lazy='dynamic')
     
 
     @property
@@ -33,42 +32,3 @@ class User(UserMixin,db.Model):
         return f'User {self.username}'
 
 
-class Pitch(db.Model):
-    __tablename__ = 'pitches'
-
-    id = db.Column(db.Integer, primary_key = True)
-    title = db.Column(db.String(255))
-    body = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-    category_id = db.Column(db.Integer, db.ForeignKey("categories.id"))
-    comments = db.relationship('Comment', backref="main_pitch", cascade="all, delete-orphan" , lazy="dynamic")
-
-    def __repr__(self):
-        return f'Pitch {self.title}'
-        
-
-
-
-
-class Category(db.Model):
-    __tablename__ = 'categories'
-
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(255))
-    pitches = db.relationship('Pitch', backref='category', lazy='dynamic')
-
-    def __repr__(self):
-        return f'Category {self.name}'
-
-
-
-class Comment(db.Model):
-    __tablename__ = 'comments'
-
-    id =  db.Column(db.Integer, primary_key = True)
-    comment = db.Column(db.String)
-    pitch_id = db.Column(db.Integer, db.ForeignKey("pitches.id"))
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
-
-    def __repr__(self):
-        return f'Comment {self.comment}'
