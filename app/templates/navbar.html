@@ -6,6 +6,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             {% if current_user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{{ url_for('main.new_blog') }}">Blogs</a></li>
             <li><a class="nav-item nav-link" href="{{ url_for('main.recent_blogs') }}">Recent Blogs</a></li>
             <li><a class="nav-item nav-link" href="{{ url_for('auth.logout') }}">Logout</a></li>
             {% else %}

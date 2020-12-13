@@ -1,10 +1,11 @@
-from app.models import Blog, Comment
+from app.models import Blog, Comment, User
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask.globals import session
 from . import main
 from flask_login import login_required, current_user
 from ..import db
 from .forms import BlogForm, CommentForm
+from ..email import mail_message
 
 @main.route('/')
 def index():
@@ -19,7 +20,7 @@ def index():
 @login_required
 def new_blog():
     form = BlogForm()
-    
+    subscribers = User.query.filter_by(subscribe_blogs = True).all()
     if form.validate_on_submit():
         blog_title = form.blog_title.data
         blog_body = form.blog_body.data
@@ -29,11 +30,14 @@ def new_blog():
 
         #save blog
         new_blog.save_blog()
-        return redirect(url_for('main.new_blog'))   
+        return redirect(url_for('main.new_blog'))  
+
+        mail_message = ("New post alert", "email/new_post", user.email, subscribers) 
 
     blogs = Blog.get_blogs()
 
     return render_template('blogs.html', form = form, blogs_list = blogs) 
+    
 
 
 

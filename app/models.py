@@ -18,6 +18,7 @@ class User(UserMixin,db.Model):
     password = db.Column(db.String(255))
     blogs = db.relationship('Blog', backref = 'user', lazy = "dynamic")
     pass_secure = db.Column(db.String(255))
+    subscribe_blogs = db.Column(db.Boolean, index = True)
     comment_id = db.relationship('Comment', backref='user', lazy='dynamic')
 
     @property

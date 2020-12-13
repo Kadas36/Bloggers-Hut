@@ -17,6 +17,7 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password',validators = [Required(),
     EqualTo('password2',message = 'Passwords must match')])
     password2 = PasswordField('Confirm Passwords',validators = [Required()])
+    subscribe_blogs = BooleanField('Subscribe to receive new posts notification')
     submit = SubmitField('Sign Up')
 
 
