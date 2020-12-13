@@ -36,6 +36,17 @@ def new_blog():
     return render_template('blogs.html', form = form, blogs_list = blogs) 
 
 
+
+@main.route('/recent_blogs', methods = ['GET'])
+@login_required
+def recent_blogs():
+        
+    blogs = reversed(Blog.get_blogs())
+
+    return render_template('recent.html', recent_list = blogs)     
+
+
+
 @main.route('/blogs/<int:blog_id>', methods = ['GET','POST'])
 @login_required
 def blog(blog_id):
@@ -57,7 +68,6 @@ def blog(blog_id):
 
     title = blog.blog_title
     return render_template('comment.html', title=title, blog=blog, commentform = commentform, comments_list = comments)   
-
 
 
 
