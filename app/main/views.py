@@ -1,10 +1,10 @@
-from app.models import Blog
+from app.models import Blog, Comment
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask.globals import session
 from . import main
 from flask_login import login_required, current_user
 from ..import db
-from .forms import BlogForm
+from .forms import BlogForm, CommentForm
 
 @main.route('/')
 def index():
@@ -36,6 +36,30 @@ def new_blog():
     return render_template('blogs.html', form = form, blogs_list = blogs) 
 
 
+@main.route('/blogs/<int:blog_id>', methods = ['GET','POST'])
+@login_required
+def blog(blog_id):
+    blog = Blog.query.get_or_404(blog_id)
+
+    commentform = CommentForm()
+    
+    if commentform.validate_on_submit():
+        comment = commentform.comment.data
+
+        #updated comment
+        new_comment = Comment(comment=comment, blog_id=blog_id)
+
+        #save comment
+        new_comment.save_comment()
+        return redirect(url_for('main.new_blog'))   
+
+    comments = Comment.get_comments()
+
+    title = blog.blog_title
+    return render_template('comment.html', title=title, blog=blog, commentform = commentform, comments_list = comments)   
+
+
+
 
 # @main.route('/blogs/comments', methods = ['GET','POST'])
 # @login_required
@@ -52,6 +76,6 @@ def new_blog():
 #         new_comment.save_comment()
 #         return redirect(url_for('main.new_blog'))   
 
-#     comments = Blog.get_comments()
+#     comments = Comment.get_comments()
 
 #     return render_template('comments.html', commentform = commentform, comments_list = comments)     

@@ -18,6 +18,7 @@ class User(UserMixin,db.Model):
     password = db.Column(db.String(255))
     blogs = db.relationship('Blog', backref = 'user', lazy = "dynamic")
     pass_secure = db.Column(db.String(255))
+    comment_id = db.relationship('Comment', backref='user', lazy='dynamic')
 
     @property
     def password(self):
@@ -42,7 +43,7 @@ class Blog(db.Model):
     blog_body = db.Column(db.String,index = True)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    # comments = db.relationship('Comment', backref = 'blog', lazy = "dynamic")
+    comments = db.relationship('Comment', backref = 'blogs', lazy = "dynamic")
 
     def save_blog(self):
         db.session.add(self)
@@ -53,19 +54,20 @@ class Blog(db.Model):
         blogs = Blog.query.all()
         return blogs
 
-# class Comment(db.Model):
-#     __tablename__= 'comments'
+class Comment(db.Model):
+    __tablename__= 'comments'
 
-#     id = db.Column(db.Integer, primary_key = True)
-#     comment = db.Column(db.String,index = True)
-#     posted = db.Column(db.DateTime,default=datetime.utcnow)
-#     blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'))
+    id = db.Column(db.Integer, primary_key = True)
+    comment = db.Column(db.String,index = True)
+    posted = db.Column(db.DateTime,default=datetime.utcnow)
+    blog_id = db.Column(db.Integer, db.ForeignKey('blogs.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-#     def save_comment(self):
-#         db.session.add(self)
-#         db.session.commit()
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
 
-#     @classmethod
-#     def get_comments(cls):    
-#         comments = Comment.query.all()
-#         return comments        
+    @classmethod
+    def get_comments(cls):    
+        comments = Comment.query.all()
+        return comments        
