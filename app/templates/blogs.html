@@ -2,15 +2,32 @@
 {% import 'bootstrap/wtf.html' as wtf%}
 
 {% block content %}
-<h1>Blogs  page</h1>
+
+
+<div class="container">
+    <h1>Blogs  page</h1>
+{% for blog in blogs_list %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ blog.blog_title }}</h5>
+            <p class="card-text">{{ blog.blog_body }}</p>
+            <a href="#" class="btn btn-primary">Comment</a>
+        </div>
+    </div>
+    <hr>
+{% endfor %} 
+
+
+
+
 <form method="POST" action="">
     {{wtf.quick_form(form)}}
 </form>
 
 
-    {% for blog in blogs_list %}
-        <p>{{blog.title}}</p>
-    {% endfor %}    
     
+    
+</div>
+
 
 {% endblock content %}
