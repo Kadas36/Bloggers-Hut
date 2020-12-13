@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf%}
+
+{% block content %}
+<h1>Blogs  page</h1>
+<form method="POST" action="">
+    {{wtf.quick_form(form)}}
+</form>
+
+
+    {% for blog in blogs_list %}
+        <p>{{blog.title}}</p>
+    {% endfor %}    
+    
+
+{% endblock content %}

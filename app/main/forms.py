@@ -1,13 +1,11 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
+from ..models import Blog
 from wtforms.validators import DataRequired
 
 
-class PitchForm(FlaskForm):
-    title = StringField('Pitch Category Title', validators=[DataRequired()])
-    body = TextAreaField('Enter your Pitch here', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+class BlogForm(FlaskForm):
 
-class CommentForm(FlaskForm):
-    comment = TextAreaField('Write a comment here', validators=[DataRequired()])
+    blog_title = StringField('Break Time', validators=[DataRequired()])
+    blog_body = TextAreaField('Enter Break Activity', validators=[DataRequired()])
     submit = SubmitField('Submit')
