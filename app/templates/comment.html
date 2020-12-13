@@ -13,10 +13,15 @@
         </div>
     </div>
     <hr>
+    
 
+    {% for comment in comments_list %}
+      <p>{{ comment.comment }}</p>  
+    {% endfor %}  
+    
     <form method="POST" action="">
         {{wtf.quick_form(commentform)}}
-    </form>
+    </form>   
 </div>
 
 

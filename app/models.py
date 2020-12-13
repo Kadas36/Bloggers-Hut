@@ -67,7 +67,4 @@ class Comment(db.Model):
         db.session.add(self)
         db.session.commit()
 
-    @classmethod
-    def get_comments(cls):    
-        comments = Comment.query.all()
-        return comments        
+          

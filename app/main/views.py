@@ -53,7 +53,7 @@ def blog(blog_id):
         new_comment.save_comment()
         return redirect(url_for('main.new_blog'))   
 
-    comments = Comment.get_comments()
+    comments = Comment.query.filter_by(blog_id=blog_id).all()
 
     title = blog.blog_title
     return render_template('comment.html', title=title, blog=blog, commentform = commentform, comments_list = comments)   
@@ -61,21 +61,4 @@ def blog(blog_id):
 
 
 
-# @main.route('/blogs/comments', methods = ['GET','POST'])
-# @login_required
-# def new_comment():
-#     commentform = CommentForm()
     
-#     if commentform.validate_on_submit():
-#         comment = commentform.comment.data
-
-#         #updated comment
-#         new_comment = Comment(comment=comment)
-
-#         #save comment
-#         new_comment.save_comment()
-#         return redirect(url_for('main.new_blog'))   
-
-#     comments = Comment.get_comments()
-
-#     return render_template('comments.html', commentform = commentform, comments_list = comments)     
