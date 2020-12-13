@@ -5,11 +5,11 @@
 
 
 <div class="container">
-    <h1>Blogs  page</h1>
+    <h1 class="text-center">Blogs  page</h1>
 {% for blog in blogs_list %}
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">{{ blog.blog_title }}</h5>
+            <h3 class="card-title">{{ blog.blog_title }}</h3>
             <p class="card-text">{{ blog.blog_body }}</p>
             <a href="#" class="btn btn-primary">Comment</a>
         </div>

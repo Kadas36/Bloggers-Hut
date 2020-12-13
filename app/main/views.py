@@ -34,3 +34,24 @@ def new_blog():
     blogs = Blog.get_blogs()
 
     return render_template('blogs.html', form = form, blogs_list = blogs) 
+
+
+
+# @main.route('/blogs/comments', methods = ['GET','POST'])
+# @login_required
+# def new_comment():
+#     commentform = CommentForm()
+    
+#     if commentform.validate_on_submit():
+#         comment = commentform.comment.data
+
+#         #updated comment
+#         new_comment = Comment(comment=comment)
+
+#         #save comment
+#         new_comment.save_comment()
+#         return redirect(url_for('main.new_blog'))   
+
+#     comments = Blog.get_comments()
+
+#     return render_template('comments.html', commentform = commentform, comments_list = comments)     
