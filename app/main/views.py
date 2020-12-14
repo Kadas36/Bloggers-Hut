@@ -1,3 +1,4 @@
+from app.requests import get_quote
 from app.models import Blog, Comment, User
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask.globals import session
@@ -12,7 +13,9 @@ def index():
     """
     Function that returns the index page
     """
-    return render_template('index.html')
+    random_quote = get_quote()
+    
+    return render_template('index.html', random_quote = random_quote)
 
 
 
@@ -73,6 +76,3 @@ def blog(blog_id):
     title = blog.blog_title
     return render_template('comment.html', title=title, blog=blog, commentform = commentform, comments_list = comments)   
 
-
-
-    

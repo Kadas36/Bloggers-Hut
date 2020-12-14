@@ -7,6 +7,8 @@ class Config:
    '''
    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://moringa:kadas36@localhost/blogger'
    SECRET_KEY = os.environ.get('SECRET_KEY')
+   QUOTES_API = 'http://quotes.stormconsultancy.co.uk/random.json'
+   
 
    #  email configurations
    MAIL_SERVER = 'smtp.googlemail.com'

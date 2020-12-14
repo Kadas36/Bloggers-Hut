@@ -4,7 +4,19 @@
 {% endblock %}
 
 {% block content %}
-<p>igiuhukk</p>
-<p>Click <a href="{{ url_for('auth.login') }}">Login</a></p>
+
+<div class="container">
+    <div class="introduction text-center">
+        <div class="intro">
+            <h1>WRITE YOUR OWN <br> PERSONAL BLOG</h1>
+            <div class="btn btn-primary">
+                <a href="{{ url_for('auth.login') }}"></a>
+                    <p>BEGIN NOW</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<p>{{ random_quote.id }}</p>
 
 {% endblock content %}
