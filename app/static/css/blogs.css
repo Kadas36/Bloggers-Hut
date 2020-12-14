@@ -1,0 +1,36 @@
+body{
+    background-color: #f1faee;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.blogs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    text-align: center;
+}
+.card{
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 5px;
+    width: 25rem;
+    height: 30rem;
+    display: flex;
+    margin-bottom: 50px;
+}
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.card-title{
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+}
+.btn{
+    padding-bottom: 10px;
+}
+.text-center{
+    font-weight: bolder;
+    margin-bottom: 30px;
+}
+.quoteday{
+    border-right: 0.5px solid rgba(0,0,0,0.1);
+}
