@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf%}
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/comment.css')}}">
+{% endblock %}
+
 
 {% block content %}
 
@@ -8,20 +12,27 @@
     
     <div class="card">
         <div class="card-body">
-            <h3 class="card-title">{{ blog.blog_title }}</h3>
+            <h3 class="card-title text-center">{{ blog.blog_title }}</h3>
             <p class="card-text">{{ blog.blog_body }}</p>
         </div>
     </div>
     <hr>
-    
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="comment">
+                {% for comment in comments_list %}
+                    <p>{{ comment.comment }}</p>  
+                    <hr>
+                {% endfor %}  
+            </div>
 
-    {% for comment in comments_list %}
-      <p>{{ comment.comment }}</p>  
-    {% endfor %}  
-    
-    <form method="POST" action="">
-        {{wtf.quick_form(commentform)}}
-    </form>   
+            <form method="POST" action="">
+                {{wtf.quick_form(commentform)}}
+            </form>  
+        </div>
+        <div class="col-md-2"></div>
+    </div> 
 </div>
 
 
