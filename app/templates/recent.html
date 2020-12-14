@@ -1,23 +1,35 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf%}
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/blogs.css')}}">
+{% endblock %}
 
 {% block content %}
 
 
 <div class="container">
-    <h1 class="text-center">Blogs  page</h1>
-    {% for blog in recent_list %}
-        <div class="card">
-            <div class="card-body">
-                <h3 class="card-title">{{ blog.blog_title }}</h3>
-                <p class="card-text">{{ blog.blog_body | truncate(150,'') }}</p>
-                <a href="{{ url_for('main.blog', blog_id = blog.id) }}" class="btn btn-primary">Read</a>
+    <h1 class="text-center">Recent Blogs</h1>
+    <div class="row">
+        <div class="col-md-9 quoteday">
+            <div class="blogs">
+                {% for blog in recent_list %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ blog.blog_title }}</h3>
+                            <p class="card-text">{{ blog.blog_body | truncate(150,'') }}</p>
+                            <a href="{{ url_for('main.blog', blog_id = blog.id) }}" class="btn btn-primary">Read</a>
+                        </div>
+                    </div>
+                {% endfor %} 
+            </div>  
+        </div> 
+        <div class="col-md-3">
+            <div class="quote text-center">
+                <h3>Quote of the Day</h3>
             </div>
         </div>
-        <hr>
-    {% endfor %} 
+    </div>           
     
 </div>
-
 
 {% endblock content %}
