@@ -1,4 +1,4 @@
-from app.requests import get_quote
+from ..requests import get_quote
 from app.models import Blog, Comment, User
 from flask import render_template, url_for, flash, redirect, request, abort
 from flask.globals import session
@@ -13,9 +13,8 @@ def index():
     """
     Function that returns the index page
     """
-    random_quote = get_quote()
-    
-    return render_template('index.html', random_quote = random_quote)
+        
+    return render_template('index.html')
 
 
 
@@ -38,8 +37,9 @@ def new_blog():
         mail_message = ("New post alert", "email/new_post", user.email, subscribers) 
 
     blogs = Blog.get_blogs()
+    random_quote = get_quote()
 
-    return render_template('blogs.html', form = form, blogs_list = blogs) 
+    return render_template('blogs.html', form = form, blogs_list = blogs, random_quote = random_quote) 
     
 
 
@@ -49,8 +49,8 @@ def new_blog():
 def recent_blogs():
         
     blogs = reversed(Blog.get_blogs())
-
-    return render_template('recent.html', recent_list = blogs)     
+    random_quote = get_quote()
+    return render_template('recent.html', recent_list = blogs, random_quote = random_quote)     
 
 
 

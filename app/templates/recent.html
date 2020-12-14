@@ -26,6 +26,11 @@
         <div class="col-md-3">
             <div class="quote text-center">
                 <h3>Quote of the Day</h3>
+
+                {% for quote in random_quote %}
+                    <h3>{{quote.quote}}</h3>
+                    <small>{{quote.author}}</small>
+                {% endfor %}
             </div>
         </div>
     </div>           
